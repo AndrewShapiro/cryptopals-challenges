@@ -40,3 +40,17 @@ def breakSingleCharXOR(inputBlock):
     # for (rank, char,text) in sorted(ranked):
     #     print ('{0},{1},{2}').format(rank,char,text)
     return sorted(ranked)[-1]
+
+def twoByteMatch(text):
+    i = 0
+    count = 0
+    while i < len(text)-1:
+        byteA = text[i]
+        byteB = text[i+1]
+        j = i+2
+        while j < len(text)-1:
+            if(text[j] == byteA and text[j+1] == byteB):
+                count += 1
+            j += 1
+        i+=1
+    return count
