@@ -45,9 +45,8 @@ for i in range(1,48):
     cipherText = cipherObj.encrypt(plainText)
     for j in range(0, len(cipherText) / 16):
         if(cipherText[j * 16 : (j+1) * 16] == cipherText[(j+1) * 16 : (j+2) * 16]):
-            print 'matching blocks: ' + str(i) + ' '+ str(len(randPrefix))
             baseSize = i
-            blockNum = j
+            blockNum = j + 1
             break
     if(baseSize != -1):
         break
@@ -59,12 +58,11 @@ for i in range(0,16):
 
 for i in range(0,10):
     base += miniBase
-blockNum += 10
-
+    blockNum += 1
 miniBase = miniBase[1:]
 
 plainText = ''
-for i in range(0, 150):
+for i in range(0, 200):
     base = base[1:]
     currentPlain= set2.pkcs7Pad(randPrefix + array.array('B', base) + unknownStr, blockSize)
     currentCipher = cipherObj.encrypt(currentPlain)[blockNum * 16 : (blockNum + 1) * 16]
