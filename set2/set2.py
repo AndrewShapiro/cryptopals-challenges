@@ -11,7 +11,9 @@ def pkcs7Validation(str):
         i = 2
         while(i <= ord(str[-1])):
             if ord(str[-i]) != ord(str[-1]):
+                # raise Exception('Invalid Padding')
                 return (False, '')
             i += 1
         return (True, str[:-(i-1)])
+    # raise Exception('Invalid Padding')
     return (False, '')
