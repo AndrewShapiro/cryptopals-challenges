@@ -24,7 +24,7 @@ def encode(userStr, cipherObj):
 def decode(cipherText, cipherObj):
     plainText = cipherObj.decrypt(cipherText)
     print plainText
-    if(string.find(plainText, ';admin=true;') == 0):
+    if(string.find(plainText, ';admin=true;') >= 0):
         print True
     else:
         print False
@@ -33,10 +33,9 @@ rndfile = Random.new()
 key = rndfile.read(16)
 iv = array.array('B', rndfile.read(16))
 cipherObj = AES.new(key, AES.MODE_CBC, iv)
-cipherText = encode("YELLOW SUBMARINEYELLOW SUBMARINEYELLOW SUBMARINE", cipherObj)
+cipherText = encode("YELLOW SUBMARINEYELLOW SUBMARINE", cipherObj)
 cipherText = array.array('B', cipherText)
-cipherText[33:49] = array.array('B', set1.bufferXOR(array.array('B', 'YELLOW SUBMARINE'), set2.pkcs7Pad(array.array('B', ';admin=true;'), 16)))
-
+cipherText[32:47] = array.array('B', set1.bufferXOR(set1.bufferXOR(array.array('B', 'YELLOW SUBMARINE'), set2.pkcs7Pad(array.array('B', ';admin=true;'), 16)),  cipherText[32:47]) )
 
 cipherObj = AES.new(key, AES.MODE_CBC, iv)
 decode(cipherText, cipherObj)
