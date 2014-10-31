@@ -7,7 +7,7 @@ def pkcs7Pad(buf, blockLen):
     return buf
 
 def pkcs7Validation(str):
-    if ord(str[-1]) < 32:
+    if ord(str[-1]) < 32 and ord(str[-1]) > 0:
         i = 2
         while(i <= ord(str[-1])):
             if ord(str[-i]) != ord(str[-1]):

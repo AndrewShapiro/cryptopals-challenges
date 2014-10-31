@@ -35,7 +35,7 @@ iv = array.array('B', rndfile.read(16))
 cipherObj = AES.new(key, AES.MODE_CBC, iv)
 cipherText = encode("YELLOW SUBMARINEYELLOW SUBMARINE", cipherObj)
 cipherText = array.array('B', cipherText)
-cipherText[32:47] = array.array('B', set1.bufferXOR(set1.bufferXOR(array.array('B', 'YELLOW SUBMARINE'), set2.pkcs7Pad(array.array('B', ';admin=true;'), 16)),  cipherText[32:47]) )
+cipherText[32:48] = array.array('B', set1.bufferXOR(set1.bufferXOR(array.array('B', 'YELLOW SUBMARINE'), set2.pkcs7Pad(array.array('B', ';admin=true;'), 16)),  cipherText[32:48]) )
 
 cipherObj = AES.new(key, AES.MODE_CBC, iv)
 decode(cipherText, cipherObj)
